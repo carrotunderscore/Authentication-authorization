@@ -39,7 +39,7 @@ public class LoginTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"false,fakePassword", "Kalle,losen", "Berit,123456", "Anna, password"})
+    @CsvSource({"Kalle,losen", "Berit,123456", "Anna, password"})
     void test_check_table_of_users(String username, String password) {
         Users users = new Users();
         users.addUsers(new User("Kalle", "losen"));
