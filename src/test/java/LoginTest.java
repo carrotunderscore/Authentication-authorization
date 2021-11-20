@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -25,7 +27,7 @@ public class LoginTest {
     }
 
     @Test
-    void test_check_user_login() throws IOException {
+    void test_check_user_login() {
         Users users = new Users();
         users.addUsers(new User("Kalle", "losen"));
         users.addUsers(new User("Berit", "123456"));
@@ -36,7 +38,18 @@ public class LoginTest {
 
     }
 
+    @ParameterizedTest
+    @CsvSource({"false,fakePassword", "Kalle,losen", "Berit,123456", "Anna, password"})
+    void test_check_table_of_users(String username, String password) {
+        Users users = new Users();
+        users.addUsers(new User("Kalle", "losen"));
+        users.addUsers(new User("Berit", "123456"));
+        users.addUsers(new User("Anna", "password"));
+        LogIn login = new LogIn();
+        ;
+        Assert.assertEquals(true, login.login(username, password, users));
 
+    }
 
 
 }
