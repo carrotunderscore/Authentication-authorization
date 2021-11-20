@@ -1,0 +1,5 @@
+Check username & password
+Use login method to check if user is in Users()
+
+Return string objects from Users()
+

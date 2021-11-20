@@ -1,55 +1,42 @@
 import Client.Users;
-import Injector.Injector;
-import org.junit.Test;
+import Service.LogIn;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class LoginTest {
 
+    @BeforeEach
+    public void setUp() {
+
+    }
+
     @Test
-    public void test_return_user_map_size(){
-        Injector injector = new Injector();
+    void test_check_user_login() throws IOException {
+        Users users = new Users();
+        users.addUsers(new User("Kalle", "losen"));
+        users.addUsers(new User("Berit", "123456"));
+        users.addUsers(new User("Anna", "password"));
 
-        Map map = injector.inject();
-        assertThat(map.size(), is(3));
+        LogIn login = new LogIn();
+        System.out.println(login.login("Berit", "123456", users));
+
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "Kalle, Berit, Anna"
-    })
-    public void test_return_user_map_users(String userKey){
-        Injector injector = new Injector();
 
-        Map map = injector.inject();
-        Assert.assertNotNull(map);
-
-        assertTrue(map.containsKey(userKey));
-
-        System.out.println(map.keySet());
-    }
-    @ParameterizedTest
-    @CsvSource({
-            "losen, 123456, password"
-    })
-    public void test_return_user_map_passwords(String userValues){
-        Injector injector = new Injector();
-
-        Map map = injector.inject();
-        Assert.assertNotNull(map);
-
-        assertTrue(map.containsValue(userValues));
-
-        System.out.println(map.values());
-    }
 
 
 }
