@@ -33,7 +33,6 @@ public class LoginTest {
 
         System.out.println(user1.getPassword());
 
-        Assertions.assertTrue(login.loginUser("Kalle", "123456", users, user1));
 
         Assertions.assertTrue(login.loginUser("Kalle", "losen", users, user1));
         Assertions.assertTrue(login.loginUser("Berit", "123456", users, user2));
