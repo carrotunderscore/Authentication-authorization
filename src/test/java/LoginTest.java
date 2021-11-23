@@ -33,7 +33,7 @@ public class LoginTest {
         users.addUsers(user3.getUsername() + ":" + key3);
         LogIn login = new LogIn();
 
-        Assertions.assertTrue(login.isUUID("HEJ"));
+        //Assertions.assertTrue(login.isUUID("HEJ"));
         Assertions.assertTrue(login.isUUID(login.loginUser("Kalle", "losen", users, user1)));
 
         //System.out.println(user1.getPassword());
