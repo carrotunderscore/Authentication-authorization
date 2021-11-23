@@ -12,7 +12,7 @@ public class main {
 }
 
 /*
-* Use Objects as User
+* Use Objects as Service.User
 * Users as list
 *
  */

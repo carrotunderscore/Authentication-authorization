@@ -5,16 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>TDD Authentication</artifactId>
+    <artifactId>TDD-Authentication</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-
-        <maven.compiler.source>1.8</maven.compiler.source>
-        3
-        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -30,6 +26,8 @@
             <version>5.8.1</version>
             <scope>test</scope>
         </dependency>
+
+
     </dependencies>
 
 </project>
