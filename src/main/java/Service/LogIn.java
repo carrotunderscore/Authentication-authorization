@@ -15,10 +15,6 @@ public class LogIn {
     public LogIn() {
     }
 
-    public boolean login(String userName, String password, Users users) {
-        return users.toString().contains(userName) & users.toString().contains(password);
-    }
-
 
     public boolean loginUser(String userName, String password, Users users, User user) throws Exception {
         boolean userExists = false;
@@ -36,19 +32,11 @@ public class LogIn {
                 break;
             }
         }
-        if(userExists){
+        if (userExists) {
             return true;
-        }
-        else{
+        } else {
             throw new Exception();
         }
     }
-
-    public void destroyUserPasswordString(User user) {
-        user.destroyPassword();
-    }
-
-
-
 
 }
