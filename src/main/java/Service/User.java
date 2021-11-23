@@ -1,5 +1,10 @@
 package Service;
 
+import Client.Users;
+import Utils.PasswordUtils;
+
+import java.util.ArrayList;
+
 public class User {
     private String username;
     private String password;
@@ -30,5 +35,6 @@ public class User {
     public String toString() {
         return username.toString() + ":" + password.toString();
     }
+
 
 }
