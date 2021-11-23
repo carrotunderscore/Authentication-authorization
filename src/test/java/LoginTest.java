@@ -16,7 +16,7 @@ public class LoginTest {
     }
 
     @Test
-    void test_check_password_hash() {
+    void test_check_usernamePassword_return_token() throws Exception {
         Users users = new Users();
         User user1 = new User("Kalle", "losen", PasswordUtils.generateSalt(15).toString());
         User user2 = new User("Berit", "123456", PasswordUtils.generateSalt(15).toString());
@@ -31,14 +31,15 @@ public class LoginTest {
         users.addUsers(key3);
         LogIn login = new LogIn();
 
-        System.out.println(user1.getPassword());
+        //System.out.println(user1.getPassword());
 
+        Assertions.assertTrue(login.loginUser("Kalle", "123456", users, user1));
 
         Assertions.assertTrue(login.loginUser("Kalle", "losen", users, user1));
         Assertions.assertTrue(login.loginUser("Berit", "123456", users, user2));
         Assertions.assertTrue(login.loginUser("Anna", "password", users, user3));
 
-        System.out.println(user1.getPassword());
+        //System.out.println(user1.getPassword());
 
 
     }
