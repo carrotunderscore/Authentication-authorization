@@ -1,45 +1,17 @@
 package Service;
 
 import Client.Users;
-import Utils.PasswordUtils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class Login {
     String uuidString;
-    List<String> token;
+    String token;
 
     public Login() {
     }
 
-    public String loginUser(String userName, String password, Users users, User user) throws Exception {
-        boolean userExists = false;
-        for (Object userItem : users.getUsers()) {
-            String[] userItemSplit = userItem.toString().split(":");
-            String key = PasswordUtils.hashPassword(user.getPassword(), user.getSalt()).get();
-            if (userItemSplit[0].equals(userName)
-                    && userItemSplit[1].equals(PasswordUtils.hashPassword(user.getPassword(), user.getSalt()).get())
-                    && PasswordUtils.verifyPassword(password, key, user.getSalt())) {
-                user.destroyPassword();
-                UUID uuid = UUID.randomUUID();
-                String uuidString = uuid.toString();
-                System.out.println(uuidString);
-                userExists = true;
-                return uuidString;
-            }
-        }
-        if (userExists) {
-            List<String> token = new ArrayList<>();
-            token.add(uuidString);
-            return uuidString;
-        } else {
-            throw new Exception();
-        }
-    }
-
-    public static boolean checkLoginUser(User user, Users users){
+    public String checkLoginUser(User user, Users users) throws Exception {
         boolean userExists = false;
         String userCredentials = user.getUsername() + ":" + user.getHashedPassword();
         for(Object userItem : users.getUsers()){
@@ -47,15 +19,21 @@ public class Login {
             //System.out.println(userCredentials);
             if(userCredentials.equals(userItem.toString())){
                 userExists = true;
+                UUID uuid = UUID.randomUUID();
+                String uuidString = uuid.toString();
+                token = uuidString;
             }
         }
         if(userExists){
             user.destroyPassword();
+            return token;
         }
-        return userExists;
+        else{
+            throw new Exception();
+        }
     }
 
-    public boolean isUUID(String string) {
+    public static boolean isUUID(String string) {
         try {
             UUID.fromString(string);
             return true;
