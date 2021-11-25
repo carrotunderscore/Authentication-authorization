@@ -1,10 +1,11 @@
 package Client;
 
-import java.io.InputStream;
+import Service.User;
+import Utils.PasswordUtils;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 
 public class Users {
@@ -18,7 +19,7 @@ public class Users {
         return users;
     }
 
-    public void addUsers(Object user) {
+    public void add(Object user) {
         users.add(user);
     }
 
@@ -28,6 +29,17 @@ public class Users {
             return users.toString();
         }
         return null;
+    }
+    public User addUserHash(String username, String password, User user){
+        String salt = PasswordUtils.generateSalt(15).orElse(null);
+        assert salt != null;
+
+        String hashedPassword = PasswordUtils.hashPassword(password, salt).orElse(null);
+        assert hashedPassword != null;
+        user.setHashedPassword(hashedPassword);
+        user.destroyPassword();
+
+        return new User(username, hashedPassword, salt);
     }
 }
 

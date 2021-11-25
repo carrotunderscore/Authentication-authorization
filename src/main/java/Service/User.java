@@ -1,14 +1,19 @@
 package Service;
 
-import Client.Users;
+import Rights.Permissions;
+import Rights.Resources;
 import Utils.PasswordUtils;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
 public class User {
     private String username;
     private String password;
     private String salt;
+    private String hashedPassword;
+    HashMap<Resources, List<Permissions>> authorizations;
 
     public User(String username, String password, String salt) {
         this.username = username;
@@ -29,6 +34,19 @@ public class User {
 
     public String getSalt() {
         return salt;
+    }
+    public HashMap getAuthorization() {
+        return authorizations;
+    }
+    public void setAuthorization(Resources resources, Permissions permissions) {
+        authorizations.put(resources, List.of(permissions));
+    }
+
+    public void setHashedPassword(String hashedPassword){
+        this.hashedPassword = hashedPassword;
+    }
+    public String getHashedPassword(){
+        return hashedPassword;
     }
 
     @Override
