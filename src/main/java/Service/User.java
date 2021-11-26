@@ -1,57 +1,76 @@
 package Service;
 
-import Rights.Permissions;
 import Rights.Resources;
-import Utils.PasswordUtils;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import Rights.Rights;
 
 public class User {
-    private String username;
+    private String userName;
     private String password;
     private String salt;
     private String hashedPassword;
-    HashMap<Resources, List<Permissions>> authorizations;
+    private String token;
 
-    public User(String username, String password, String salt) {
-        this.username = username;
+    private Rights accountRights;
+    private Resources provisionResource;
+
+
+    public User (String userName, String password, String salt) {
+        this.userName = userName;
         this.password = password;
         this.salt = salt;
     }
 
-    public String getUsername() {
-        return username;
+
+    public User(String userName, String password, String salt, Rights accountRights, Resources provisionResource) {
+        this.userName = userName;
+        this.password = password;
+        this.salt = salt;
+        this.accountRights = accountRights;
+        this.provisionResource = provisionResource;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
     public String getPassword() {
         return password;
     }
-    public void destroyPassword(){
+
+    public void destroyPassword() {
         this.password = "\000";
     }
 
     public String getSalt() {
         return salt;
     }
-    public HashMap getAuthorization() {
-        return authorizations;
-    }
-    public void setAuthorization(Resources resources, Permissions permissions) {
-        authorizations.put(resources, List.of(permissions));
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public void setHashedPassword(String hashedPassword){
+    public String getToken() {
+        return token;
+    }
+
+    public void setHashedPassword(String hashedPassword) {
         this.hashedPassword = hashedPassword;
     }
-    public String getHashedPassword(){
+    public Rights getAccountRights() {
+        return accountRights;
+    }
+
+    public Resources getProvisionResource() {
+        return provisionResource;
+    }
+
+    public String getHashedPassword() {
         return hashedPassword;
     }
 
     @Override
     public String toString() {
-        return username.toString() + ":" + password.toString();
+        return userName.toString() + ":" + password.toString();
     }
 
 
